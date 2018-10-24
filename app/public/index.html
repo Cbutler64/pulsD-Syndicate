@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Admin</title>
+	<!-- Latest compiled and minified CSS & JS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Add Events to the Database</h1>
+			<hr>
+		</div>
+		<div class="row">
+
+			<div class="col-lg-12">
+
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">
+							<strong>Add Event</strong>
+						</h3>
+					</div>
+					<div class="card-body">
+						<form action="" method="POST" role="form">
+
+							<div class="form-group">
+								<label for="">Event Organization</label>
+								<input type="text" class="form-control" id="organization" placeholder="PulsD">
+							</div>
+
+							<div class="form-group">
+								<label for="">Event Name</label>
+								<input type="text" class="form-control" id="event-name" placeholder="">
+							</div>
+
+							<div class="form-group">
+								<label for="">Start Date (MM/DD/YYYY) </label>
+								<br>
+								<input type="text" class="form-control dateform" id="start-date-month" placeholder="MM">
+								<input type="text" class="form-control dateform" id="start-date-day" placeholder="DD">
+								<input type="text" class="form-control dateform" id="start-date-year" placeholder="YYYY">
+
+							</div>
+
+							<div class="form-group">
+								<label for="">Start time (Eg. 09:30)</label>
+								<input type="text" class="form-control" id="start-hour" placeholder="HH:MM">
+							</div>
+
+							<div class="form-group">
+								<label for="">End Date (MM/DD/YYYY) </label>
+								<br>
+								<input type="text" class="form-control dateform" id="end-date-month" placeholder="MM">
+								<input type="text" class="form-control dateform" id="end-date-day" placeholder="DD">
+								<input type="text" class="form-control dateform" id="end-date-year" placeholder="YYYY">
+							</div>
+
+							<div class="form-group">
+								<label for="">End time (Eg. 22:30)</label>
+								<input type="text" class="form-control" id="end-hour" placeholder="HH:MM">
+							</div>
+
+							<div class="form-group">
+								<label for="">Timezone</label>
+								<select class="form-control" name="timezone" id="timezone">
+									<option value="US/Eastern">US/Eastern</option>
+									<option value="US/Central">US/Central</option>
+									<option value="US/Mountain">US/Mountain</option>
+									<option value="US/Pacific">US/Pacific</option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label for="">Event Description</label>
+								<input type="text" class="form-control" id="description" placeholder="">
+							</div>
+
+						</form>
+						<br>
+						<div class="text-right">
+							<button type="submit" class="btn btn-primary btn-md" id="add-btn">
+								<span class="fa"></span> Submit</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<script src="js/app.js" type="text/javascript"></script>
+
+</body>
+
+</html>
