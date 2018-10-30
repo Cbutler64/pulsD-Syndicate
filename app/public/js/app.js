@@ -1,29 +1,37 @@
 // *********************************************************************************
 // app.js - takes the form inputs then sends it to the server to save in the DB.
 // *********************************************************************************
-
+$("#start-date").datepicker();
+$("#end-date").datepicker();
+console.log()
 // when user clicks add-btn
 $("#add-btn").on("click", function (event) {
   event.preventDefault();
-  //get times and convert to proper dateTime
-  let startDate = $("#start-date-year").val().trim()
-    + "-"
-    + $("#start-date-month").val().trim()
-    + "-"
-    + $("#start-date-day").val().trim()
-    + "T"
 
-  let startTime = $("#start-hour").val().trim() + ":00"
   
-
-  let endDate = $("#end-date-year").val().trim()
+  var startDateInput = $("#start-date").val().trim()
+  var startDateArr = startDateInput.split("/")
+  //get times and convert to proper dateTime
+  let startDate = startDateArr[2]
     + "-"
-    + $("#end-date-month").val().trim()
+    + startDateArr[0]
     + "-"
-    + $("#end-date-day").val().trim()
+    + startDateArr[1]
     + "T"
+//console.log(startDate)
+  let startTime = $("#start-hour").val().trim() + ":00Z"
 
-  let endTime = $("#end-hour").val().trim() + ":00"
+  var endDateInput = $("#end-date").val().trim()
+  var endDateArr = endDateInput.split("/")
+
+  let endDate = endDateArr[2]
+    + "-"
+    + endDateArr[0]
+    + "-"
+    + endDateArr[1]
+    + "T"
+//console.log(endDate)
+  let endTime = $("#end-hour").val().trim() + ":00Z"
 //create times
   let startDatetime = startDate + startTime;
   let endDatetime = endDate + endTime;

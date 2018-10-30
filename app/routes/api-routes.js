@@ -33,12 +33,13 @@ module.exports = function (app) {
       currency: request.currency,
       posted: false
     });
-    syndicateEventBrite(request)
+    //syndicateEventBrite(request)
   });
 
   //task scheduler to check the server every hour
   cron.schedule(' 00 59 * * * *', () => {
-    console.log('running a task every hour');
+    //cron.schedule('* * * * *', () => {  
+  console.log('running a task every hour');
     event.findAll({
       where: {
         posted: false
@@ -68,7 +69,7 @@ module.exports = function (app) {
           id: results.dataValues.id
         }
       }).then(function (event) {
-        //syndicateEventBrite(results)
+        syndicateEventBrite(results)
         //syndicateXing
       }).catch(function (error) {
         console.log(error);
@@ -81,33 +82,37 @@ module.exports = function (app) {
     var organizationID;
     axios.get('https://www.eventbriteapi.com/v3/users/me/organizations/?token=' + eventbriteToken, {
     })
-    .then(function (response) {
+      .then(function (response) {
 
-      console.log(response.data.organizations[0].id);
-      organizationID = response.data.organizations[0].id;
-     postToEventBrite(results, eventbriteToken, organizationID)
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+        console.log(response.data.organizations[0].id);
+        organizationID = response.data.organizations[0].id;
+        postToEventBrite(results, eventbriteToken, organizationID)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
-function postToEventBrite(post, token, id){
-console.log(post+token+id)    
+  function postToEventBrite(post, token, id) {
+    console.log(post + token + id)
 
-axios.post('https://www.eventbriteapi.com/v3/organizations/' + id + '/events/?token=' + token, {
-     event:{
-      name: post.eventName,
-      description: post.description,
-      start:{
-       timeZone: post.startTime,
-      } ,
-      end:{
-        timeZone: post.endTime
-      },
-      timezoneStart: post.timeZone,
-      timezoneEnd: post.timeZone,
-      currency: post.currency
-     }
+    axios.post('https://www.eventbriteapi.com/v3/organizations/' + id + '/events/?token=' + token, {
+      event: {
+        name: {
+          html: post.dataValues.eventName
+        },
+        description: {
+          html: post.dataValues.description
+        },
+        start: {
+          timezone: post.dataValues.timeZoneStart,
+          utc: post.dataValues.startTime
+        },
+        end: {
+          timezone: post.dataValues.timeZoneEnd,
+          utc: post.dataValues.endTime
+        },
+        currency: post.dataValues.currency
+      }
 
     })
       .then(function (response) {
@@ -116,6 +121,29 @@ axios.post('https://www.eventbriteapi.com/v3/organizations/' + id + '/events/?to
       .catch(function (error) {
         console.log(error);
       });
+
+    // axios.post('https://www.eventbriteapi.com/v3/organizations/' + id + '/events/?token=' + token, {
+    //      event:{
+    //       name: post.eventName,
+    //       description: post.description,
+    //       start:{
+    //        timeZone: post.startTime,
+    //       } ,
+    //       end:{
+    //         timeZone: post.endTime
+    //       },
+    //       timezoneStart: post.timeZone,
+    //       timezoneEnd: post.timeZone,
+    //       currency: post.currency
+    //      }
+
+    //     })
+    //       .then(function (response) {
+    //         console.log(response);
+    //       })
+    //       .catch(function (error) {
+    //         console.log(error);
+    //       });
 
   }
 
@@ -126,13 +154,13 @@ axios.post('https://www.eventbriteapi.com/v3/organizations/' + id + '/events/?to
         ID: 12345
       }
     })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-    
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
     axios.post('https://www.xing-events.com/api/event/create?apikey=NdWEGXJRiVRtXNRKZWOTIVReLghaFue6HyrIO9b6aoIzhN1hNN&version=1&format=json', {
       title: results.dataValues.eventName,
       hostId: results.dataValues.organization,

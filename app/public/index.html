@@ -10,6 +10,9 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -47,9 +50,8 @@
 							<div class="form-group">
 								<label for="">Start Date (MM/DD/YYYY) </label>
 								<br>
-								<input type="text" class="form-control dateform" id="start-date-month" placeholder="MM">
-								<input type="text" class="form-control dateform" id="start-date-day" placeholder="DD">
-								<input type="text" class="form-control dateform" id="start-date-year" placeholder="YYYY">
+								<input type="text" class="form-control" id="start-date" placeholder="">
+								
 
 							</div>
 
@@ -59,11 +61,11 @@
 							</div>
 
 							<div class="form-group">
+								
 								<label for="">End Date (MM/DD/YYYY) </label>
 								<br>
-								<input type="text" class="form-control dateform" id="end-date-month" placeholder="MM">
-								<input type="text" class="form-control dateform" id="end-date-day" placeholder="DD">
-								<input type="text" class="form-control dateform" id="end-date-year" placeholder="YYYY">
+								<input type="text" class="form-control" id="end-date" placeholder="">
+
 							</div>
 
 							<div class="form-group">
@@ -74,10 +76,10 @@
 							<div class="form-group">
 								<label for="">Timezone</label>
 								<select class="form-control" name="timezone" id="timezone">
-									<option value="US/Eastern">US/Eastern</option>
-									<option value="US/Central">US/Central</option>
-									<option value="US/Mountain">US/Mountain</option>
-									<option value="US/Pacific">US/Pacific</option>
+									<option value="America/New_York">US/Eastern</option>
+									<option value="America/Chicago">US/Central</option>
+									<option value="America/Denver">US/Mountain</option>
+									<option value="America/Los_Angeles">US/Pacific</option>
 								</select>
 							</div>
 
