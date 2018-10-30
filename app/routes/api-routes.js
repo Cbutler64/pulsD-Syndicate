@@ -33,6 +33,7 @@ module.exports = function (app) {
       currency: request.currency,
       posted: false
     });
+    syndicateEventBrite(request)
   });
 
   //task scheduler to check the server every hour
@@ -54,12 +55,12 @@ module.exports = function (app) {
       console.log(error);
     });
   });
-//changes the posted value in the table to true and syndicates to the event websites
+  //changes the posted value in the table to true and syndicates to the event websites
   function checkPosted(results) {
     var update = {
       posted: true
     }
-    
+
     event.update(
       update,
       {
@@ -76,18 +77,41 @@ module.exports = function (app) {
 
   // pushes data via a POST request to eventbrite 
   function syndicateEventBrite(results) {
+    var eventbriteToken = "B2JP2SFBONFLVFEKA7PD"
+    var organizationID;
+    axios.get('https://www.eventbriteapi.com/v3/users/me/organizations/?token=' + eventbriteToken, {
+    })
+    .then(function (response) {
 
-    axios.post('https://www.eventbriteapi.com/v3/organizations/' + results.dataValues.organization + '/?token=MYTOKEN', {
-      name: results.dataValues.eventName,
-      description: results.dataValues.description,
-      start: results.dataValues.startTime,
-      end: results.dataValues.endTime,
-      timezoneStart: results.dataValues.timeZone,
-      timezoneEnd: results.dataValues.timeZone,
-      currency: results.dataValues.currency
+      console.log(response.data.organizations[0].id);
+      organizationID = response.data.organizations[0].id;
+     postToEventBrite(results, eventbriteToken, organizationID)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+function postToEventBrite(post, token, id){
+console.log(post+token+id)    
+
+axios.post('https://www.eventbriteapi.com/v3/organizations/' + id + '/events/?token=' + token, {
+     event:{
+      name: post.eventName,
+      description: post.description,
+      start:{
+       timeZone: post.startTime,
+      } ,
+      end:{
+        timeZone: post.endTime
+      },
+      timezoneStart: post.timeZone,
+      timezoneEnd: post.timeZone,
+      currency: post.currency
+     }
+
     })
       .then(function (response) {
-        //console.log(response);
+        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
@@ -97,7 +121,18 @@ module.exports = function (app) {
 
   // pushes data via a POST request to Xing 
   function syndicateXing(results) {
-
+    axios.get('/user', {
+      params: {
+        ID: 12345
+      }
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
     axios.post('https://www.xing-events.com/api/event/create?apikey=NdWEGXJRiVRtXNRKZWOTIVReLghaFue6HyrIO9b6aoIzhN1hNN&version=1&format=json', {
       title: results.dataValues.eventName,
       hostId: results.dataValues.organization,
