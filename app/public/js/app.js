@@ -54,5 +54,5 @@ $("#add-btn").on("click", function (event) {
     .then(function (data) {
       console.log(data);
     });
-
+location.reload()
 });
