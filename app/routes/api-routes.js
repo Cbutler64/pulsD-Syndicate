@@ -39,7 +39,7 @@ module.exports = function (app) {
   //task scheduler to check the server every hour
   cron.schedule(' 00 59 * * * *', () => {
     //cron.schedule('* * * * *', () => {  
-  console.log('running a task every hour');
+    console.log('running a task every hour');
     event.findAll({
       where: {
         posted: false
@@ -121,30 +121,6 @@ module.exports = function (app) {
       .catch(function (error) {
         console.log(error);
       });
-
-    // axios.post('https://www.eventbriteapi.com/v3/organizations/' + id + '/events/?token=' + token, {
-    //      event:{
-    //       name: post.eventName,
-    //       description: post.description,
-    //       start:{
-    //        timeZone: post.startTime,
-    //       } ,
-    //       end:{
-    //         timeZone: post.endTime
-    //       },
-    //       timezoneStart: post.timeZone,
-    //       timezoneEnd: post.timeZone,
-    //       currency: post.currency
-    //      }
-
-    //     })
-    //       .then(function (response) {
-    //         console.log(response);
-    //       })
-    //       .catch(function (error) {
-    //         console.log(error);
-    //       });
-
   }
 
   // pushes data via a POST request to Xing 

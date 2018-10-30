@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 4000;
 app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
-// var db = require("./app/model");
+ //var db = require("./app/model/event.js");
 
 // Static directory to be served
 app.use(express.static("app/public"));
@@ -27,7 +27,7 @@ require("./app/routes/api-routes.js")(app);
 
 // Starts the server to begin listening
 // =============================================================
-// db.sequelize.sync({ force: false }).then(function() {
+ //db.sequelize.sync({ force: false }).then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });

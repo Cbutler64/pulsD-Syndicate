@@ -3,10 +3,10 @@
 // *********************************************************************************
 $("#start-date").datepicker();
 $("#end-date").datepicker();
-console.log()
+//console.log()
 // when user clicks add-btn
 $("#add-btn").on("click", function (event) {
-  event.preventDefault();
+  //event.preventDefault();
 
   
   var startDateInput = $("#start-date").val().trim()
